@@ -1,6 +1,5 @@
 package org.dmaksymiv.notification;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.dmaksymiv.bot.CoinAvailabilityBot;
 import org.dmaksymiv.repo.InFileUserStorage;
 import org.dmaksymiv.repo.UserRepository;
@@ -22,8 +21,7 @@ public class DailyNotificationJob implements Job {
         UserRepository repository = new InFileUserStorage();
 
         Set<Long> chatIds = repository.getChatIds();
-        Dotenv dotenv = Dotenv.load();
-        String botToken = dotenv.get("BOT_TOKEN");
+        String botToken = System.getenv("BOT_TOKEN");
 
         CoinAvailabilityBot bot = CoinAvailabilityBot.getInstance(botToken);
         for (long chatId : chatIds) {

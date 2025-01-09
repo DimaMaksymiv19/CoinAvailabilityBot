@@ -1,6 +1,5 @@
 package org.dmaksymiv;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.dmaksymiv.bot.CoinAvailabilityBot;
 import org.dmaksymiv.notification.SchedulerConfig;
 import org.slf4j.Logger;
@@ -16,8 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            Dotenv dotenv = Dotenv.load();
-            String botToken = dotenv.get("BOT_TOKEN");
+            String botToken = System.getenv("BOT_TOKEN");
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(CoinAvailabilityBot.getInstance(botToken));
         } catch (TelegramApiException e) {
